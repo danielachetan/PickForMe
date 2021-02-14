@@ -46,4 +46,15 @@ public class BookFirebaseService {
             }
         });
     }
+
+    public Book saveBook(Book book) {
+        DatabaseReference booksRef = dbReference.child("books");
+
+        DatabaseReference newBookRef = booksRef.push();
+        newBookRef.setValueAsync(book);
+
+        System.out.println("Your book was successfully added to the database!");
+
+        return book;
+    }
 }

@@ -7,6 +7,8 @@ import com.example.demo.ModelAssembler.BookModelAssembler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.IanaLinkRelations;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,24 +40,34 @@ public class BookController {
 
 
     @GetMapping("/books")
-    @ResponseBody
-    public CollectionModel<EntityModel<Book>> all() throws ExecutionException, InterruptedException {
+
+    public @ResponseBody /*CollectionModel<EntityModel<Book>>*/List<Book> all() throws ExecutionException, InterruptedException {
         //bookFirebaseService.getAllBooks();
         //return bookFirebaseService.allBooks;
 
         bookFirebaseService.getAllBooks();
 
-        List<EntityModel<Book>> books = bookFirebaseService.allBooks.stream()
-                .map(assembler::toModel)
-                .collect(Collectors.toList());
+        List<Book> books = bookFirebaseService.allBooks;//.stream()
+                //.map(assembler::toModel)
+                //.collect(Collectors.toList());
 
-        return CollectionModel.of(books, linkTo(methodOn(com.example.demo.Controller.BookController.class).all()).withSelfRel());
+        return books; //CollectionModel.of(books, linkTo(methodOn(com.example.demo.Controller.BookController.class).all()).withSelfRel());
     }
 
     @PostMapping("/createBook")
+    public @ResponseBody ResponseEntity<?> createNewBook(Book book) throws ExecutionException, InterruptedException {
+
+        EntityModel<Book> entityModel = assembler.toModel(bookFirebaseService.saveBook(book));
+
+        return ResponseEntity
+                .created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
+                .body(entityModel);
+    }
+    /*
     public String createNewBook(@RequestBody Book newBook) throws ExecutionException, InterruptedException {
         return bookFirestoreService.saveBookDetails(newBook);
     }
+     */
 
     @GetMapping("/getBookDetails")
     public Book getBookDetails(@RequestHeader String id) throws ExecutionException, InterruptedException {

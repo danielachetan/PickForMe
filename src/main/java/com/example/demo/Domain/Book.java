@@ -2,16 +2,17 @@ package com.example.demo.Domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 @Entity
-public class Book {
+public class Book implements Serializable {
 
-    private @Id String id;
-    private String title;
-    private String author;
+    //private @Id String id;
+    private @Id String title;
+    private @Id String author;
     //private List<String> genre;
     private String photo;
     private String description;
@@ -39,9 +40,9 @@ public class Book {
     }
 
 
-    public String getId() {
-        return id;
-    }
+    //public String getId() {
+        //return id;
+    //}
 
 
     public String getTitle() {
@@ -131,7 +132,10 @@ public class Book {
 
     @Override
     public String toString() {
-        String string = "'" + getTitle() + "' - " + getAuthor();
+        //String string = "'" + getTitle() + "' - " + getAuthor();
+        String string = "Book{title='" + getTitle() + "', author='" + getAuthor() + "', photo='" + getPhoto() +
+                "', description='" + getDescription() + "', rating=" + getRating() + ", numberOfPages=" +
+                getNumberOfPages() + "}";
         return string;
     }
 
