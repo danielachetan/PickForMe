@@ -45,9 +45,9 @@ public class BookController {
         //bookFirebaseService.getAllBooks();
         //return bookFirebaseService.allBooks;
 
-        bookFirebaseService.getAllBooks();
+        //bookFirebaseService.getAllBooks();
 
-        List<Book> books = bookFirebaseService.allBooks;//.stream()
+        List<Book> books = bookFirebaseService.getAllBooks();//.stream()
                 //.map(assembler::toModel)
                 //.collect(Collectors.toList());
 

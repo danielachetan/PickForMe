@@ -25,17 +25,16 @@ public class BookFirebaseService {
         dbReference = dbFirebase.getReference();
     }
 
-    public void getAllBooks() throws InterruptedException, ExecutionException {
+    public List<Book> getAllBooks() throws InterruptedException, ExecutionException {
+        List<Book> books = new ArrayList<>();
         dbReference.child("books").addValueEventListener(new ValueEventListener() {
-
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                allBooks.clear();
                 if (dataSnapshot.exists())
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         Book book = ds.getValue(Book.class);
-                        if (!allBooks.contains(book))
-                            allBooks.add(book);
+                        if (!books.contains(book))
+                            books.add(book);
                         System.out.println(book.toString());
                     }
             }
@@ -45,6 +44,7 @@ public class BookFirebaseService {
                 System.out.println("Couldn't retrieve books.");
             }
         });
+        return books;
     }
 
     public Book saveBook(Book book) {
