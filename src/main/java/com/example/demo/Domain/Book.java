@@ -8,11 +8,11 @@ import java.util.Arrays;
 import java.util.List;
 
 @Entity
-public class Book implements Serializable {
+public class Book {
 
     //private @Id String id;
     private @Id String title;
-    private @Id String author;
+    private String author;
     //private List<String> genre;
     private String photo;
     private String description;
