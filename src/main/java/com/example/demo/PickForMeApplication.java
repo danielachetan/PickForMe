@@ -16,6 +16,7 @@ public class PickForMeApplication {
         SpringApplication.run(PickForMeApplication.class, args);
     }
 
+    /*
     @Bean
     CommandLineRunner init(BookRepository bookRepository) {
         return args -> {
@@ -25,4 +26,5 @@ public class PickForMeApplication {
         };
     }
 
+	*/
 }

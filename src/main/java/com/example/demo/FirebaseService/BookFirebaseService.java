@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-@Service
+//@Service
 public class BookFirebaseService {
 
     FirebaseInitialize firebaseInitialize;

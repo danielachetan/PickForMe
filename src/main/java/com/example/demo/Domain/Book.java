@@ -13,7 +13,7 @@ public class Book {
     //private @Id String id;
     private @Id String title;
     private String author;
-    //private List<String> genre;
+    private String genre;
     private String photo;
     private String description;
     private double rating;
@@ -22,17 +22,17 @@ public class Book {
     public Book() {
         title = "";
         author = "";
-        //genre = new ArrayList<String>();
+        genre = "";
         photo = "";
         description = "";
         rating = 0;
         numberOfPages = 0;
     }
 
-    public Book(String title, String author, String photo, String description, int numberOfPages) {
+    public Book(String title, String author, String genre, String photo, String description, int numberOfPages) {
         this.title = title;
         this.author = author;
-        //this.genre = new ArrayList<String>(Arrays.asList(genre));
+        this.genre = genre;
         this.photo = photo;
         this.description = description;
         rating = 0;
@@ -53,9 +53,9 @@ public class Book {
         return author;
     }
 
-    //public List<String> getGenre() {
-        //return genre;
-    //}
+    public String getGenre() {
+        return genre;
+    }
 
     public String getPhoto() {
         return photo;
@@ -88,10 +88,10 @@ public class Book {
         this.author = author;
     }
 
-    //public void setGenre(List<String> genre) {
+    public void setGenre(String genre) {
 
-        //this.genre.addAll(genre);
-    //}
+        this.genre = genre;
+    }
 
     public void setPhoto(String photo) {
         this.photo = photo;
